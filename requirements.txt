@@ -1,14 +1,8 @@
-Flask
-render_template
-request
+flask
 yfinance
 numpy
 pandas
-sklearn
-MinMaxScaler
-tensorflow.keras.models
-model-loads
-DatetimeIndex
-json
+scikit-learn
+tensorflow
 plotly
 dash-apexcharts
