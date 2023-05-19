@@ -1,1 +1,14 @@
-Flask==1.1.4
+Flask
+render_template
+request
+yfinance
+numpy
+pandas
+sklearn
+MinMaxScaler
+tensorflow.keras.models
+model-loads
+DatetimeIndex
+json
+plotly
+dash-apexcharts
