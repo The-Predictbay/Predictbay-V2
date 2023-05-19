@@ -21,14 +21,9 @@ def index():
     df = yf.download(ticker, period=period)
 
     closing_prices = df['Close']
-
     high_value = get_today_high(ticker)
-    increase_status_high, percentage_change_high = get_percentage_change_high(ticker)
     close_value = get_today_close(ticker)
-    increase_status_Close, percentage_change_Close = get_percentage_change_Close(ticker)
     open_value = get_today_open(ticker)
-    increase_status_Open, percentage_change_Open = get_percentage_change_Open(ticker)
-
     chart_data = [{'x': str(date), 'y': price} for date, price in closing_prices.items()]
     ma100 = closing_prices.rolling(window=100).mean()
     ma100 = [{'x': str(date), 'y': price} for date, price in ma100.items() if not pd.isna(price)]
@@ -82,9 +77,7 @@ def index():
                     xaxis_title='Date',
                     yaxis_title='Price',
                     # width=1000,
-                    height=500 ,
-                    plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)'
-                    )
+                    height=500, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
     graph_html = fig2.to_html(full_html=False)
 
 
@@ -107,7 +100,7 @@ def index():
     predicted_prices = scaler.inverse_transform(predicted_prices)
     predicted_price = predicted_prices[0][0]
 
-    return render_template('index.html', ticker=ticker, chart_data=chart_data, predicted_price=predicted_price, ma100=ma100,ma200=ma200, graph_html=graph_html,high_value=high_value,close_value=close_value,open_value=open_value,high_status=increase_status_high,high_percent=percentage_change_high,Close_status=increase_status_Close,Close_percent=percentage_change_Close,Open_status=increase_status_Open,Open_percent=percentage_change_Open)
+    return render_template('index.html', ticker=ticker, chart_data=chart_data, predicted_price=predicted_price, ma100=ma100,ma200=ma200, graph_html=graph_html,high_value=high_value,close_value=close_value,open_value=open_value)
 
 # Function to get today's high value of a stock
 def get_today_high(symbol):
@@ -133,54 +126,6 @@ def get_today_open(symbol):
         return data['Open'].iloc[-1]
     return None
 
-def get_percentage_change_high(symbol):
-    stock = yf.Ticker(symbol)
-    data = stock.history(period='2d')
-    if len(data) >= 2:
-        yesterday_high = data['High'].iloc[-2]
-        today_high = data['High'].iloc[-1]
-        percentage_change = ((today_high - yesterday_high) / yesterday_high) * 100
-        if percentage_change > 0:
-            increase_status = 'Increased'
-        elif percentage_change < 0:
-            increase_status = 'Decreased'
-        else:
-            increase_status = 'No change'
-        return increase_status, percentage_change
-    return None, None
-
-def get_percentage_change_Close(symbol):
-    stock = yf.Ticker(symbol)
-    data = stock.history(period='2d')
-    if len(data) >= 2:
-        yesterday_high = data['Close'].iloc[-2]
-        today_high = data['Close'].iloc[-1]
-        percentage_change = ((today_high - yesterday_high) / yesterday_high) * 100
-        if percentage_change > 0:
-            increase_status = 'Increased'
-        elif percentage_change < 0:
-            increase_status = 'Decreased'
-        else:
-            increase_status = 'No change'
-        return increase_status, percentage_change
-    return None, None
-
-def get_percentage_change_Open(symbol):
-    stock = yf.Ticker(symbol)
-    data = stock.history(period='2d')
-    if len(data) >= 2:
-        yesterday_high = data['Open'].iloc[-2]
-        today_high = data['Open'].iloc[-1]
-        percentage_change = ((today_high - yesterday_high) / yesterday_high) * 100
-        if percentage_change > 0:
-            increase_status = 'Increased'
-        elif percentage_change < 0:
-            increase_status = 'Decreased'
-        else:
-            increase_status = 'No change'
-        return increase_status, percentage_change
-    return None, None
-
 @app.route('/faq')
 def faq():
     return render_template('pages-faq.html')
@@ -196,6 +141,14 @@ def about():
 @app.route('/overview')
 def overview():
     return render_template('pages-overview.html')
+
+@app.route('/news')
+def news():
+    return render_template('news.html')
+
+@app.route('/gchat')
+def gchat():
+    return render_template('gchat.html')
 
 @app.route('/register')
 def register():
