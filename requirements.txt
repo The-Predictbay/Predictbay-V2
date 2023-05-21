@@ -8,4 +8,5 @@ plotly
 statsmodels
 matplotlib
 seaborn
+IPython
 flask_cors
