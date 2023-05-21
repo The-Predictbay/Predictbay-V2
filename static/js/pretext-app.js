@@ -1,7 +1,8 @@
 const form = document.getElementById("chat-form");
 const input = document.getElementById("chat-input");
 const messages = document.getElementById("chat-messages");
-const apiKey = "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";
+const apiKey = "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";
+// deepraj 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
 
 document.getElementById("chat-icon").addEventListener("click", () => {
     const chatContainer = document.getElementById("chat-container");
@@ -26,11 +27,11 @@ form.addEventListener("submit", async (e) => {
         {
             prompt: preText + `${message}`,
             model: "text-davinci-003",
-            temperature: 0,
+            temperature: 0.9,
             max_tokens: 500,
             top_p: 1,
             frequency_penalty: 0.0,
-            presence_penalty: 0.0,
+            presence_penalty: 0.6,
         },
         {
             headers: {

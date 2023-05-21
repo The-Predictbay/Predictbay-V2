@@ -46,27 +46,30 @@
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
-
+    
         <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="/">
                 <input type="text" id="ticker" name="ticker" value="{{ ticker }}" placeholder="Enter ticker symbol">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
         </div>
-
+    
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
                 <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi-search"></i>
+                    <a class="nav-link nav-icon search-bar-toggle" href="#">
+                        <i class="bi bi-search"></i>
                     </a>
                 </li><!-- End Search Icon-->
-
+                <li class="nav-item">
+                    <a class="nav-link nav-icon" href="https://predictbay-deployment-gfg-dfdw6l7waq-el.a.run.app/">
+                        <i class="bi bi-arrow-return-left"></i>
+                    </a>
+                </li><!-- Add a new list item for the icon -->
             </ul>
         </nav><!-- End Icons Navigation -->
-
     </header><!-- End Header -->
+    
 
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
@@ -539,7 +542,7 @@
                                         <i class="bi bi-cash-stack"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{biLSTM_predicted_price}}</h6>
+                                        <h6>{{biLSTM_predicted_price|round(4)}}</h6>
                                         <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span
                                             class="text-muted small pt-2 ps-1">increase</span> -->
                     
@@ -560,24 +563,13 @@
 
     </main><!-- End #main -->
 
-    <div id="chat-container">
-        <div id="chat-window">
-            <div class="main-title">
-                Predict Bay
-            </div>
-            <div id="chat-messages"></div>
-            <form id="chat-form">
-                <input type="text" id="chat-input" autocomplete="off" placeholder="Type your message here" required />
-                <button type="submit">Send</button>
-            </form>
-        </div>
-    </div>
-    <div id="chat-icon">
-        <img src="/static/img/chatbot_1.png" alt="Chat" />
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/static/js/pretext-app.js"></script>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="Predict-Bay-Chat-Bot"
+      agent-id="8d3a76f6-5407-46d9-8133-59a8919cffc5"
+      language-code="en"
+    ></df-messenger>
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
@@ -586,8 +578,10 @@
         </div>
     </footer><!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    <!--
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+        -->
 
     <!-- Vendor JS Files -->
     <script src="/static/js/apexcharts.min.js"></script>

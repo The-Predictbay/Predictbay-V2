@@ -144,25 +144,37 @@ window.onload = function() {
         chat_input.setAttribute("id", "chat_input");
         chat_input.setAttribute("maxlength", 1000);
         chat_input.placeholder = `${parent.get_name()}. Say something...`;
-        chat_input.onkeyup = function() {
-          if (chat_input.value.length > 0) {
-            chat_input_send.removeAttribute("disabled");
-            chat_input_send.classList.add("enabled");
-            chat_input_send.onclick = function() {
-              chat_input_send.setAttribute("disabled", true);
-              chat_input_send.classList.remove("enabled");
-              if (chat_input.value.length <= 0) {
-                return;
-              }
-              parent.create_load("chat_content_container");
-              parent.send_message(chat_input.value);
-              chat_input.value = "";
-              chat_input.focus();
-            };
-          } else {
+        chat_input.addEventListener("keydown", function(event) {
+          if (event.key === "Enter" && chat_input.value.length > 0) {
+            event.preventDefault();
+            chat_input_send.setAttribute("disabled", true);
             chat_input_send.classList.remove("enabled");
+            parent.create_load("chat_content_container");
+            parent.send_message(chat_input.value);
+            chat_input.value = "";
+            chat_input.focus();
           }
-        };
+        });
+chat_input.onkeyup = function() {
+  if (chat_input.value.length > 0) {
+    chat_input_send.removeAttribute("disabled");
+    chat_input_send.classList.add("enabled");
+    chat_input_send.onclick = function() {
+      chat_input_send.setAttribute("disabled", true);
+      chat_input_send.classList.remove("enabled");
+      if (chat_input.value.length <= 0) {
+        return;
+      }
+      parent.create_load("chat_content_container");
+      parent.send_message(chat_input.value);
+      chat_input.value = "";
+      chat_input.focus();
+    };
+  } else {
+    chat_input_send.classList.remove("enabled");
+  }
+};
+
   
         var chat_logout_container = document.createElement("div");
         chat_logout_container.setAttribute("id", "chat_logout_container");
