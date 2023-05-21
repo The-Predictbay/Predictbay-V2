@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Login - PredictBay Bootstrap Template</title>
+  <title>Login-PredictBay</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -13,16 +13,41 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css” />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link href="/static/css/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/boxicons.min.css" rel="stylesheet">
+  <link href="/static/css/quill.bubble.css" rel="stylesheet">
+  <link href="/static/css/quill.snow.css" rel="stylesheet">
+  <link href="/static/css/remixicon.css" rel="stylesheet">
+  <link href="/static/css/style.css" rel="stylesheet">
+  <link href="/static/css/styles.css" rel="stylesheet">
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
+    .or-container {
+      align-items: center;
+      color: #ccc;
+      display: flex;
+      margin: 25px 0
+    }
+
+    .line-separator {
+      background-color: #ccc;
+      flex-grow: 5;
+      height: 1px
+    }
+  </style>
+
 
 </head>
 
@@ -76,7 +101,40 @@
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
-                    <button class="social-signin google" id="login">Login with google</button>
+                    <div class="or-container">
+                      <div class="line-separator"></div>
+                      <div class="or-label">or</div>
+                      <div class="line-separator"></div>
+                    </div>
+                    <button class="social-signin google" id="login" style="
+                    display: flex;
+                    -webkit-box-pack: center;
+                    justify-content: center;
+                    -webkit-box-align: center;
+                    align-items: center;
+                    appearance: none;
+                    position: relative;
+                    cursor: pointer;
+                    text-align: center;
+                    line-height: normal;
+                    white-space: nowrap;
+                    width: 100%;
+                    margin: 0px;
+                    padding: 10px 12px;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-weight: 500;
+                    font-style: normal;
+                    font-size: 17px;
+                    border-width: 1px;
+                    border-radius: 10px;
+                    border-style: solid;
+                    border-color: rgb(228, 228, 228);
+                    background-color: #0d6efd ;
+                    color: #fff">
+                    <img src="/static/img/google.png" alt="" style="position: absolute;
+                    left: 10px;
+                    width: 25px;
+                    height: auto;">Login with google</button>
                     <div class="col-12">
                       <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
                     </div>
@@ -97,23 +155,24 @@
     </div>
   </main>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
-    import { getAuth ,GoogleAuthProvider, getRedirectResult,signInWithPopup,signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    import { getAuth, GoogleAuthProvider, getRedirectResult, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAJbalc5AZU8cSYczlIsMWScLhca0YmvhY",
       authDomain: "auth-login-779c5.firebaseapp.com",
       projectId: "auth-login-779c5",
-      storageBucket: "auth-login-779c5.appspot.com",  
+      storageBucket: "auth-login-779c5.appspot.com",
       messagingSenderId: "12338852662",
       appId: "1:12338852662:web:23e43cc45ef82cd5ee3997",
       measurementId: "G-E68CGVCWVD"
     };
-  
+
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -124,37 +183,37 @@
       signInWithPopup(auth, provider)
     });
 
-  signInWithPopup(auth, provider)
-  .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    const user = result.user;
-    alert("success");
-    alert(user.uid + " signed in as "+ user.displayName);
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 10000);
-    // alert(user.displayName)
-    // alert(user.email)
-    // alert(user.photoURL)
-    // after successfull login redirect to home page
-    // window.location.href = "index.html";
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        alert("success");
+        alert(user.uid + " signed in as " + user.displayName);
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 10000);
+        // alert(user.displayName)
+        // alert(user.email)
+        // alert(user.photoURL)
+        // after successfull login redirect to home page
+        // window.location.href = "index.html";
 
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    const email = error.customData.email;
-    const credential = GoogleAuthProvider.credentialFromError(error);
-  
-  });
-  
-  login.addEventListener('click', e => {
-  signOut(auth).then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
-}); 
+      }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+
+      });
+
+    login.addEventListener('click', e => {
+      signOut(auth).then(() => {
+        // Sign-out successful.
+      }).catch((error) => {
+        // An error happened.
+      });
+    });
     // const analytics = getAnalytics(app);
   </script>
 
@@ -168,6 +227,7 @@
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/js/main.js"></script>
+  <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 
 </body>
 

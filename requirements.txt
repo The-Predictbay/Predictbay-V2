@@ -5,4 +5,7 @@ pandas
 scikit-learn
 tensorflow
 plotly
-dash-apexcharts
+statsmodels
+matplotlib
+seaborn
+flask_cors

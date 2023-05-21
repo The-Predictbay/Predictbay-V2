@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>F.A.Q </title>
+  <title>PredictBay </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -66,7 +66,6 @@
 
   </header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
   
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -91,6 +90,21 @@
           <span>Contact</span>
         </a>
       </li><!-- End Contact Page Nav -->
+  
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url_for('news')}}">
+          <i class="bi bi-newspaper"></i>
+          <span>News</span>
+        </a>
+      </li><!-- End News Page Nav -->
+  
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url_for('gchat')}}">
+          <i class="bi bi-chat-right-dots"></i>
+          <span>Global Chat</span>
+        </a>
+      </li><!-- End Global Chat Nav -->
+  
   
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{url_for('register')}}">
@@ -139,8 +153,6 @@
     </div><!-- End Page Title -->
 
     <section class="section faq">
-      <div class="row">
-        <div class="col-lg-6">
 
           <div class="card basic">
             <div class="card-body">
@@ -174,6 +186,7 @@
           </div>
 
           <!-- F.A.Q Group 1 -->
+
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">PredictBay</h5>
@@ -236,6 +249,19 @@
                     <div class="accordion-body">
                       The application retrieves historical data from Yahoo Finance, which covers a wide range of stock exchanges worldwide. However, it's important to note that the availability of data may vary for different exchanges, and some smaller or less popular exchanges may have limited or no data coverage.                    </div>
                   </div>
+                  
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" data-bs-target="#faqsOne-6" type="button" data-bs-toggle="collapse">
+                      How do I find out the closing price of my desired stock ?
+                  </h2>
+                  <div id="faqsOne-6" class="accordion-collapse collapse" data-bs-parent="#faq-group-1">
+                    <div class="accordion-body">
+                      Just put the appropriate stock ticker of the stock you want to know about in the search bar and PredictBay will do the rest for you !
+                  </div>
+                  
                 </div>
 
               </div>
@@ -244,11 +270,12 @@
           </div><!-- End F.A.Q Group 1 -->
 
         </div>
+          
 
-        <div class="col-lg-6">
+        <!-- <div class="col-lg-6"> -->
 
           <!-- F.A.Q Group 2 -->
-          <div class="card">
+          <!-- <div class="card">
             <div class="card-body">
               <h5 class="card-title">How to Use PredictBay</h5>
 
@@ -323,10 +350,11 @@
               </div>
 
             </div>
-          </div><!-- End F.A.Q Group 2 -->
+          </div> -->
+          <!-- End F.A.Q Group 2 -->
 
           <!-- F.A.Q Group 3 -->
-          <div class="card">
+          <!-- <div class="card">
             <div class="card-body">
               <h5 class="card-title">Dolore occaecati ducimus quam</h5>
 
@@ -400,11 +428,12 @@
               </div>
 
             </div>
-          </div><!-- End F.A.Q Group 3 -->
+          </div> -->
+          <!-- End F.A.Q Group 3 -->
 
-        </div>
+        <!-- </div>
 
-      </div>
+      </div> -->
     </section>
 
   </main><!-- End #main -->
