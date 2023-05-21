@@ -82,7 +82,7 @@ def Data_fetch_transform(data):
     return X_train,X_test,y_train,ytest,scaler
 
 def biLSTM(ticker, result_queue):
-    bilstm_model = load_model("bilstm_1000epoch_mayukh.h5")
+    bilstm_model = load_model("bilstm_1000_epochs.h5")
     X_train,X_test,y_train,ytest,scaler = Data_fetch_transform(ticker)
     train_predict=bilstm_model.predict(X_train)
     test_predict=bilstm_model.predict(X_test)
@@ -161,7 +161,7 @@ def index():
     x_train, y_train = np.array(x_train), np.array(y_train)
 
     # Load model
-    model = load_model('keras_model.h5')
+    model = load_model('lstm_1000_epochs.h5')
 
     result_queue = Queue()
 
