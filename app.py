@@ -45,8 +45,8 @@ from queue import Queue
 
 app = Flask(__name__)
 
-def Data_fetch_transform(ticker):
-    data = yf.download(ticker)
+def Data_fetch_transform(data):
+    # data = yf.download(ticker)
     data['Date'] = pd.to_datetime(data.index, infer_datetime_format=True)
     data_feature_selected = data.drop(axis=1, labels=["Open", "High", "Low", "Volume"])
     data_feature_selected['differenced_trasnformation_demand'] = data_feature_selected['Adj Close'].diff().values
@@ -59,7 +59,7 @@ def Data_fetch_transform(ticker):
     # Convert the date to a string
     current_date_string = current_date.strftime('%Y-%m-%d')
     df1 = data_feature_selected.copy()
-    mask = (df1['Date'] > '2010-01-01') & (df1['Date'] <= current_date_string)
+    # mask = (df1['Date'] > '2010-01-01') & (df1['Date'] <= current_date_string)
     y = df1['Adj Close']
     scaler=MinMaxScaler(feature_range=(0,1))
     y=scaler.fit_transform(np.array(y).reshape(-1,1))
@@ -123,7 +123,9 @@ def index():
     if request.method == 'POST':
         ticker = request.form['ticker']
     else:
-        ticker = 'AAPL' 
+        ticker = 'AAPL'
+    
+
 
     period = '10y'
     df = yf.download(ticker, period=period)
@@ -164,11 +166,10 @@ def index():
     result_queue = Queue()
 
     # Creating thread for model prediction
-    bilstm_thread = threading.Thread(target=biLSTM, args=(ticker, result_queue))
+    bilstm_thread = threading.Thread(target=biLSTM, args=(df, result_queue))
     bilstm_thread.start()
 
-    # Wait for the thread to finish
-    bilstm_thread.join()
+    
 
     past_100_days = data_training.tail(100)
     final_df = pd.concat([past_100_days, data_testing], ignore_index=True)
@@ -209,6 +210,9 @@ def index():
     last_100_days_scaled = scaler.fit_transform(last_100_days)
 
     predicted_prices = []
+
+    # Wait for the thread to finish
+    bilstm_thread.join()
     
     biLSTM_predicted_price, predictions_biLSTM, biLSTM_ytest = result_queue.get()
 
