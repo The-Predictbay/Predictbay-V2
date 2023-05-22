@@ -12,7 +12,7 @@ The project aims to provide stock price predictions for a given ticker symbol us
 
 The Flask web application provides a user interface for interacting with the stock prediction models. It uses HTML templates to render the web pages and accepts user inputs for the ticker symbol. It retrieves stock data using the Yahoo Finance API and displays the historical price chart, including moving averages. It also displays the predicted prices from both models, along with other stock information such as the today's high, close, and open values. The application provides additional pages for FAQs, contact information, about section, user registration, and news. It also includes a global chat feature and a login page. Overall, the project combines traditional machine learning techniques with deep learning (LSTM) to predict stock prices. The Flask web application serves as a user-friendly interface to interact with the models and view the predictions, historical data, and other stock-related information.
 
-<img align="left" height="200px" src="https://cdni.iconscout.com/illustration/premium/thumb/stock-market-and-trading-education-7113777-5783443.png">
+<img align="left" height="290px" src="https://cdni.iconscout.com/illustration/premium/thumb/stock-market-and-trading-education-7113777-5783443.png">
 
 # Machine Learning Model
 
