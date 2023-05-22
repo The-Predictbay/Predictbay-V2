@@ -21,3 +21,10 @@ The traditional machine learning model used in the project is a regression model
 # Bi-directional LSTM Model
 
 The bi-directional LSTM model is implemented using the Keras library.The Data_fetch_transform function is responsible for fetching the stock data, preprocessing it, and splitting it into training and testing sets. The model is trained on the training set using the LSTM architecture with a time step of 100. The training and testing sets are reshaped to fit the model's input shape. The model is used to predict prices on the testing set, which are then inverse-transformed using the scaler. Additionally, the code includes an evaluate_predictions function that calculates the difference and ratio between the predicted and actual prices and identifies outliers based on a given threshold. The model also predicts the next day's closing price.
+
+<hr>
+
+<img src="Predictbay_Template/img1.png">
+<img src="Predictbay_Template/img2.png">
+
+
