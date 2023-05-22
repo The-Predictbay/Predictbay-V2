@@ -33,7 +33,7 @@ The bi-directional LSTM model is implemented using the Keras library.The Data_fe
 <img src="Predictbay_Template/img4.png">
 <img src="Predictbay_Template/img5.png">
 <img src="Predictbay_Template/img6.png">
-<img src="Predictbay_Template/img7.png">
+
 
 
 
