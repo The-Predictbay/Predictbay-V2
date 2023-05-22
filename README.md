@@ -16,7 +16,7 @@ The Flask web application provides a user interface for interacting with the sto
 
 # Machine Learning Model
 
-The traditional machine learning model used in the project is a regression model trained on historical stock price data. The model is loaded and the data is preprocessesd by scaling it using MinMaxScaler and splitting it into training and testing sets. The model is trained on the training set and used to predict prices on the testing set. The predicted prices are then inverse-transformed using the scaler to obtain the actual predicted values. Finally, the model predicts the next day's closing price based on the last 100 days of historical data.
+The traditional machine learning model used in the project is a regression model trained on historical stock price data. The model is loaded and the data is preprocessesd by scaling it using MinMaxScaler and splitting it into training and testing sets. The model is trained on the training set and used to predict prices on the testing set. The predicted prices are then inverse-transformed using the scaler to obtain the actual predicted values.
 
 # Bi-directional LSTM Model
 
