@@ -1,4 +1,5 @@
 <h1 align="center">Predictbay</h1>
+<h5 align="center">"Master the Art of Stock Forecasting: Harness the Power of Machine Learning"</h5>
 
 <hr>
 
@@ -24,7 +25,17 @@ The bi-directional LSTM model is implemented using the Keras library.The Data_fe
 
 <hr>
 
+# Predictbay Features
+
 <img src="Predictbay_Template/img1.png">
 <img src="Predictbay_Template/img2.png">
+<img src="Predictbay_Template/img3.png">
+<img src="Predictbay_Template/img4.png">
+<img src="Predictbay_Template/img5.png">
+<img src="Predictbay_Template/img6.png">
+<img src="Predictbay_Template/img7.png">
+
+
+
 
 
