@@ -134,7 +134,7 @@ def index():
     if request.method == 'POST':
         ticker = request.form['ticker']
     else:
-        ticker = 'AAPL'
+        ticker = 'GOOGL'
     
     try:
         period = '10y'
@@ -375,4 +375,4 @@ def login():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,threaded=True,use_reloader=True)
+    app.run(debug=False,threaded=True,use_reloader=False)
