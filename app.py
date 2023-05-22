@@ -263,6 +263,10 @@ def index():
         return render_template('index.html', ticker=ticker, chart_data=chart_data, predicted_price=round(predicted_price, 2), biLSTM_predicted_price=round(biLSTM_predicted_price, 2), uprange = uprange, downrange = downrange, bilstm_graph_html = bilstm_graph_html, ma100=ma100,ma200=ma200, graph_html=graph_html,high_value=high_value,close_value=close_value,open_value=open_value,high_status=increase_status_high,high_percent=percentage_change_high,Close_status=increase_status_Close,Close_percent=percentage_change_Close,Open_status=increase_status_Open,Open_percent=percentage_change_Open)
     except InvalidTickerError as e:
         return render_template('errorpage.html')
+        if request.method == 'POST':
+            ticker = request.form['ticker']
+            index()
+
 
 
 # Function to get today's high value of a stock
