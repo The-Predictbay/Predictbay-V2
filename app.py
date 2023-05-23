@@ -208,7 +208,7 @@ def index():
         fig2.add_trace(go.Scatter(x=df.index[int(len(df)*0.70):], y=y_predict[:, 0], name='Predict'))
         fig2.update_layout(
                         xaxis_title='Date',
-                        yaxis_title='Price',
+                        yaxis_title="Price(standardized)",
                         height=500 ,
                         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                         xaxis=dict(showticklabels=False)
@@ -231,7 +231,7 @@ def index():
         fig3.add_trace(go.Scatter(x=df.index[int(len(df)*0.70):], y=predictions_biLSTM[:, 0], name='Predict'))
         fig3.update_layout(
                         xaxis_title='Date',
-                        yaxis_title='Price',
+                        yaxis_title="Price(standardized)",
                         height=500 ,
                         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                         xaxis=dict(showticklabels=False)
