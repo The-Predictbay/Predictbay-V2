@@ -135,10 +135,16 @@ def index():
         ticker = request.form['ticker']
     else:
         ticker = 'GOOGL'
+
+        if ticker.isspace():
+            render_template('errorpage.html')
+            exit()
     
     try:
         period = '10y'
         df = get_data(ticker, period)
+
+
 
         closing_prices = df['Close']
 
