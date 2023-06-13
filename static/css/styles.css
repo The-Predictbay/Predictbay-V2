@@ -318,6 +318,7 @@ body {
   border: none;
   border-radius: 5px;
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  /* height: 200px;  */
 }
 .me-2 {
   margin-right: 1.5rem!important;
@@ -1344,4 +1345,8 @@ body {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+#close_percent{
+  padding-bottom: 0%;
 }

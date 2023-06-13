@@ -31,6 +31,7 @@
     <link href="/static/css/remixicon.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
     <link href="/static/css/styles.css" rel="stylesheet">
+    {{ turbo() }}
 
 </head>
 
@@ -176,8 +177,8 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{high_value|round(3)}}</h6>
-                                        <span class="text-success small pt-1 fw-bold">{{high_percent|round(4)}}%</span> <span
-                                            class="text-muted small pt-2 ps-1">{{high_status}}</span>
+                                        <span class="text-success small pt-1 fw-bold"><div id=high_percent>{{high_percent|round(4)}}%</div></span> <span
+                                            class="text-muted small pt-2 ps-1"><div id="_status">{{high_status}}</div></span>
 
                                     </div>
                                 </div>
@@ -201,8 +202,8 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{open_value|round(3)}}</h6>
-                                        <span class="text-danger small pt-1 fw-bold">{{Open_percent|round(4)}}%</span> <span
-                                            class="text-muted small pt-2 ps-1">{{Open_status}}</span>
+                                        <span class="text-danger small pt-1 fw-bold"><div id=open_percent>{{Open_percent|round(4)}}%</div></span> <span
+                                            class="text-muted small pt-2 ps-1"><div id="open_status">{{Open_status}}</div></span>
                     
                                     </div>
                                 </div>
@@ -225,9 +226,9 @@
                                         <i class="bi bi-cash-stack"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{close_value|round(3)}}</h6>
-                                        <span class="text-success small pt-1 fw-bold">{{Close_percent|round(4)}}%</span> <span
-                                            class="text-muted small pt-2 ps-1">{{Close_status}}</span>
+                                        <h6><div id="close">{{close_value|round(3)}}</div></h6>
+                                        <span class="text-success small pt-1 fw-bold"><div id=close_percent>{{Close_percent}}</div></span><span
+                                            class="text-muted small pt-2 ps-1"><div id="close_status">{{Close_status}}</div></span>
 
                                     </div>
                                 </div>

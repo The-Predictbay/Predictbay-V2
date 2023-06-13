@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile</title>
+</head>
+
+<body>
+    <h1>Profile</h1>
+    {% if 'username' in session %}
+    <p>Welcome, {{ session['username'] }}!</p>
+    <form action="{{ url_for('profile') }}" method="POST">
+        <label for="new_password">New Password:</label>
+        <input type="password" id="new_password" name="new_password" required><br><br>
+        <input type="submit" value="Change Password">
+    </form>
+    <form action="{{ url_for('logout') }}" method="POST">
+        <input type="submit" value="Logout">
+    </form>
+    {% else %}
+    <p>You must be logged in to view this page.</p>
+    <p><a href="{{ url_for('login') }}">Login</a></p>
+    {% endif %}
+</body>
+
+</html>
