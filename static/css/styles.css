@@ -13,19 +13,30 @@
   scroll-behavior: smooth;
 }
 
+
+#loader {
+  background: #212529 url(/static/img/loadermain.gif) no-repeat center;
+  background-size: 10%;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
-  color: #444444;
+  background: #212529;
+  color: #F0F4F8;
+
 }
 
 a {
-  color: #4154f1;
+  color: #F0F4F8;
   text-decoration: none;
 }
 
 a:hover {
-  color: #717ff5;
+  color: #D9E2EC;
   text-decoration: none;
 }
 
@@ -64,7 +75,7 @@ h6 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #012970;
+  color: #F0F4F8;
 }
 
 /*--------------------------------------------------------------
@@ -218,7 +229,7 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: 10px;
-  background-color:white;
+  background-color: white;
 }
 
 #chat-form {
@@ -317,15 +328,23 @@ body {
   margin-bottom: 30px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
-  /* height: 200px;  */
+  background-color: #343a40;
+  border-radius: 15px;
 }
+
 .me-2 {
-  margin-right: 1.5rem!important;
+  margin-right: 1.5rem !important;
 }
+
 .ms-2 {
-  margin-left: 1.5rem!important;
+  margin-left: 1.5rem !important;
 }
+
+.text-muted {
+  --bs-text-opacity: 1;
+  color: #9FB3C8 !important;
+}
+
 .card-header,
 .card-footer {
   border-color: #ebeef4;
@@ -338,18 +357,21 @@ body {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #012970;
+  color: #D9E2EC;
   font-family: "Poppins", sans-serif;
 }
 
 .card-title span {
-  color: #899bbd;
+  color: #9FB3C8;
   font-size: 14px;
   font-weight: 400;
 }
 
 .card-body {
   padding: 0 20px 20px 20px;
+  background-color: #343a40;
+  border-radius: 15px;
+
 }
 
 .card-img-overlay {
@@ -427,13 +449,13 @@ body {
 }
 
 .breadcrumb .active {
-  color: #51678f;
+  color: #9FB3C8;
   font-weight: 600;
 }
 
 /* Bordered Tabs */
 .nav-tabs-bordered {
-  border-bottom: 2px solid #ebeef4;
+  border-bottom: 2px solid #343a40;
 }
 
 .nav-tabs-bordered .nav-link {
@@ -444,13 +466,13 @@ body {
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #4154f1;
+  color: #343a40;
 }
 
 .nav-tabs-bordered .nav-link.active {
-  background-color: #fff;
-  color: #4154f1;
-  border-bottom: 2px solid #4154f1;
+  background-color: #343a40;
+  color: #fff;
+  border-bottom: 2px solid #343a40;
 }
 
 /*--------------------------------------------------------------
@@ -474,7 +496,7 @@ body {
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #012970;
+  color: #D9E2EC;
   font-family: "Nunito", sans-serif;
 }
 
@@ -482,8 +504,8 @@ body {
   transition: all 0.5s;
   z-index: 997;
   height: 60px;
-  box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  box-shadow: 0px 0px 15px #161a1d;
+  background-color: #161a1d;
   padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
@@ -493,13 +515,14 @@ body {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #012970;
+  color: #F0F4F8;
 }
 
 .header .search-bar {
   min-width: 360px;
   padding: 0 20px;
 }
+
 
 @media (max-width: 1199px) {
   .header .search-bar {
@@ -509,7 +532,8 @@ body {
     right: 0;
     padding: 20px;
     box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
-    background: white;
+    color: #102A43;
+    background-color: #D9E2EC;
     z-index: 9999;
     transition: 0.3s;
     visibility: hidden;
@@ -530,8 +554,10 @@ body {
 .header .search-form input {
   border: 0;
   font-size: 14px;
-  color: #012970;
-  border: 1px solid rgba(1, 41, 112, 0.2);
+  color: #000;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+  background-color: #D9E2EC;
+  border: 1px solid #343a40;
   padding: 7px 38px 7px 8px;
   border-radius: 3px;
   transition: 0.3s;
@@ -570,7 +596,7 @@ body {
 
 .header-nav .nav-icon {
   font-size: 22px;
-  color: #012970;
+  color: #F0F4F8;
   margin-right: 25px;
   position: relative;
 }
@@ -711,8 +737,9 @@ body {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
-  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  box-shadow: 0px 0px 20px #040f0f;
+
+  background-color: #343a40;
 }
 
 @media (max-width: 1199px) {
@@ -771,6 +798,8 @@ body {
 
 .sidebar-nav .nav-item {
   margin-bottom: 5px;
+  color: #F0F4F8;
+
 }
 
 .sidebar-nav .nav-heading {
@@ -786,35 +815,39 @@ body {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #D9E2EC;
   transition: 0.3;
-  background: #f6f9ff;
+  background: #343a40;
   padding: 10px 15px;
   border-radius: 4px;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
 }
 
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
+  color: #9FB3C8;
+  ;
 }
 
 .sidebar-nav .nav-link.collapsed {
-  color: #012970;
-  background: #fff;
+  color: #D9E2EC;
+  background: #343a40;
+
 }
 
 .sidebar-nav .nav-link.collapsed i {
-  color: #899bbd;
+  color: #9FB3C8;
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #4154f1;
-  background: #f6f9ff;
+  color: #fff;
+  background: #6c757d;
+
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #4154f1;
+  color: #fff;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -920,7 +953,7 @@ body {
 
 .dashboard .info-card h6 {
   font-size: 28px;
-  color: #012970;
+  color: #D9E2EC;
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -948,6 +981,11 @@ body {
 .dashboard .customers-card .card-icon {
   color: #ff771d;
   background: #ffecdf;
+}
+
+
+.legendtext {
+  color: #D9E2EC;
 }
 
 /* Activity */
@@ -1297,7 +1335,7 @@ body {
 .error-404 h1 {
   font-size: 180px;
   font-weight: 700;
-  color: #4154f1;
+  color: #f8f9fa;
   margin-bottom: 0;
   line-height: 150px;
 }
@@ -1305,12 +1343,12 @@ body {
 .error-404 h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #012970;
+  color: #e9ecef;
   margin-bottom: 30px;
 }
 
 .error-404 .btn {
-  background: #51678f;
+  background: #495057;
   color: #fff;
   padding: 8px 30px;
 }
@@ -1332,12 +1370,11 @@ body {
   padding: 20px 0;
   font-size: 14px;
   transition: all 0.3s;
-  border-top: 1px solid #cddfff;
 }
 
 .footer .copyright {
   text-align: center;
-  color: #012970;
+  color: #adb5bd;
 }
 
 .footer .credits {
@@ -1347,6 +1384,5 @@ body {
   color: #012970;
 }
 
-#close_percent{
-  padding-bottom: 0%;
-}
+/* newsletter form */
+

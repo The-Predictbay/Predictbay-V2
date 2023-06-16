@@ -71,6 +71,9 @@
               <div class="card mb-3">
 
                 <div class="card-body">
+                  {% if error %}
+                  <p>{{ error }}</p>
+                  {% endif %}
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                     <p class="text-center small">Enter your username & password to login</p>
@@ -101,12 +104,12 @@
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
-                    <div class="or-container">
+                    <!-- <div class="or-container">
                       <div class="line-separator"></div>
                       <div class="or-label">or</div>
                       <div class="line-separator"></div>
-                    </div>
-                    <button class="social-signin google" id="login" style="
+                    </div> -->
+                    <!-- <button class="social-signin google" id="login" style="
                     display: flex;
                     -webkit-box-pack: center;
                     justify-content: center;
@@ -134,7 +137,7 @@
                     <img src="/static/img/google.png" alt="" style="position: absolute;
                     left: 10px;
                     width: 25px;
-                    height: auto;">Login with google</button>
+                    height: auto;">Login with google</button> -->
                     <div class="col-12">
                       <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
                     </div>

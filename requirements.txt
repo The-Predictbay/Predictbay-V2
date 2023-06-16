@@ -1,4 +1,4 @@
-Flask
+flask
 yfinance
 numpy
 pandas
@@ -8,8 +8,5 @@ plotly
 statsmodels
 matplotlib
 seaborn
-turbo-flask
-flask-cors
 IPython
-ta
-stock_indicators
+flask_cors
