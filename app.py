@@ -41,7 +41,6 @@ from flask_cors import CORS
 import json
 from math import floor
 import threading
-import ta
 from queue import Queue
 
 app = Flask(__name__)
@@ -129,65 +128,6 @@ def biLSTM(ticker, result_queue):
     # return next_day, predictions, ytest
     result_queue.put((next_day, predictions, ytest))
 
-def format_market_cap(market_cap):
-    if market_cap is None:
-        return 'N/A'
-
-    suffixes = ['', 'K', 'M', 'B', 'T']
-    suffix_index = 0
-
-    while market_cap >= 1000 and suffix_index < len(suffixes) - 1:
-        market_cap /= 1000
-        suffix_index += 1
-
-    return f'{market_cap:.2f} {suffixes[suffix_index]}'
-
-
-def create_candlestick_chart(data):
-    chart = go.Figure(data=[go.Candlestick(
-        x=data.index,
-        open=data['Open'],
-        high=data['High'],
-        low=data['Low'],
-        close=data['Close'],
-        increasing_line_color='green',
-        decreasing_line_color='red',
-        name='Candlestick'
-    )])
-
-    chart.update_layout(
-        # title='Stock Chart',
-        xaxis=dict(
-            rangeslider=dict(visible=False),
-            type='date',
-            showticklabels=False,
-            gridcolor='gray'
-        ),
-        xaxis_title='Date',
-        plot_bgcolor='rgba(0,0,0,0)',
-        paper_bgcolor='rgba(0,0,0,0)',
-        yaxis=dict(
-            title='Price',
-            color='white',
-            gridcolor='gray' 
-        ),
-        font=dict(color='white'), 
-        hovermode='x unified', 
-        hoverdistance=100, 
-        spikedistance=1000, 
-        xaxis_showspikes=True,  
-        yaxis_showspikes=True, 
-        xaxis_spikemode='across',  
-        yaxis_spikemode='across',  
-        xaxis_spikecolor='white', 
-        yaxis_spikecolor='white',
-        height=580  
-    )
-
-    graph = chart.to_html(full_html=False)
-
-    return graph
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -195,23 +135,10 @@ def index():
         ticker = request.form['ticker']
     else:
         ticker = 'GOOGL'
-
-        if ticker.isspace():
-            render_template('errorpage.html')
-            exit()
     
     try:
         period = '10y'
         df = get_data(ticker, period)
-        company = yf.Ticker(ticker)
-        info = company.info
-        chart = create_candlestick_chart(df)
-        company_name = info['longName']
-        market_cap = info['marketCap']
-        market_cap_formatted = format_market_cap(market_cap)
-        short_description = info['longBusinessSummary']
-
-
 
         closing_prices = df['Close']
 
@@ -281,13 +208,10 @@ def index():
         fig2.add_trace(go.Scatter(x=df.index[int(len(df)*0.70):], y=y_predict[:, 0], name='Predict'))
         fig2.update_layout(
                         xaxis_title='Date',
-                        yaxis_title="Price (standardized)",
+                        yaxis_title="Price(standardized)",
                         height=500 ,
                         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                        font=dict(color='white'),
-                        title=dict(font=dict(color='white')),
-                        xaxis=dict(showticklabels=False,gridcolor='gray'),
-                        yaxis=dict(gridcolor='gray')
+                        xaxis=dict(showticklabels=False)
                         )
         graph_html = fig2.to_html(full_html=False)
 
@@ -307,13 +231,10 @@ def index():
         fig3.add_trace(go.Scatter(x=df.index[int(len(df)*0.70):], y=predictions_biLSTM[:, 0], name='Predict'))
         fig3.update_layout(
                         xaxis_title='Date',
-                        yaxis_title="Price (standardized)",
+                        yaxis_title="Price(standardized)",
                         height=500 ,
                         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                        font=dict(color='white'),
-                        title=dict(font=dict(color='white')),
-                        xaxis=dict(showticklabels=False,gridcolor='gray'),
-                        yaxis=dict(gridcolor='gray')
+                        xaxis=dict(showticklabels=False)
                         )
         bilstm_graph_html = fig3.to_html(full_html=False)
 
@@ -339,7 +260,7 @@ def index():
             downrange = floor(biLSTM_predicted_price)
 
          
-        return render_template('index.html', ticker=ticker, chart_data=chart_data, predicted_price=round(predicted_price, 2), biLSTM_predicted_price=round(biLSTM_predicted_price, 2), uprange = uprange, downrange = downrange, bilstm_graph_html = bilstm_graph_html, ma100=ma100,ma200=ma200, graph_html=graph_html,high_value=high_value,close_value=close_value,open_value=open_value,high_status=increase_status_high,high_percent=percentage_change_high,Close_status=increase_status_Close,Close_percent=percentage_change_Close,Open_status=increase_status_Open,Open_percent=percentage_change_Open,company_name=company_name,market_cap=market_cap_formatted,short_description=short_description,chart=chart)
+        return render_template('index.html', ticker=ticker, chart_data=chart_data, predicted_price=round(predicted_price, 2), biLSTM_predicted_price=round(biLSTM_predicted_price, 2), uprange = uprange, downrange = downrange, bilstm_graph_html = bilstm_graph_html, ma100=ma100,ma200=ma200, graph_html=graph_html,high_value=high_value,close_value=close_value,open_value=open_value,high_status=increase_status_high,high_percent=percentage_change_high,Close_status=increase_status_Close,Close_percent=percentage_change_Close,Open_status=increase_status_Open,Open_percent=percentage_change_Open)
     except InvalidTickerError as e:
         return render_template('errorpage.html')
         if request.method == 'POST':
@@ -451,125 +372,6 @@ def gchat():
 @app.route('/login')
 def login():
     return render_template('pages-login.html')
-
-def fetch_stock_data(symbol):
-    stock = yf.Ticker(symbol)
-    data = stock.history(period="5y")
-
-    stock_data = data.reset_index()  # Reset index to convert Date into a column
-    stock_data.rename(columns={'Date': 'date', 'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Volume': 'volume'}, inplace=True)
-
-    return stock_data
-
-def create_graph(x, y, indicator, title):
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=x, y=y, name='Close Price'))
-    if indicator is not None:
-        fig.add_trace(go.Scatter(x=x, y=indicator))
-    fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                      font=dict(color='white'),
-                      title=dict(font=dict(color='white')),
-                      xaxis=dict(showticklabels=False,gridcolor='gray'),
-                      yaxis=dict(gridcolor='gray'))
-    return fig
-
-@app.route('/indicators',methods=['GET', 'POST'])
-def indicators():
-    if request.method == 'POST':
-        ticker = request.form['ticker']
-    else:
-        ticker = 'GOOGL'
-
-        if ticker.isspace():
-            render_template('errorpage.html')
-            exit()
-    
-    try:
-        stock_data = fetch_stock_data(ticker)
-        # Calculate indicators
-        sma_indicator = ta.trend.sma_indicator(stock_data['close'], window=20)
-        ema_indicator = ta.trend.ema_indicator(stock_data['close'], window=20)
-        rsi_indicator = ta.momentum.rsi(stock_data['close'], window=14)
-        wma_indicator = ta.trend.WMAIndicator(stock_data['close'], window=20)
-        vwap_indicator = ta.volume.VolumeWeightedAveragePrice(stock_data['high'], stock_data['low'], stock_data['close'], stock_data['volume'])
-        stochastic_indicator = ta.momentum.StochasticOscillator(stock_data['high'], stock_data['low'], stock_data['close'], window=14, smooth_window=3)
-        atr_indicator = ta.volatility.AverageTrueRange(stock_data['high'], stock_data['low'], stock_data['close'], window=14)
-        cmf_indicator = ta.volume.ChaikinMoneyFlowIndicator(stock_data['high'], stock_data['low'], stock_data['close'], stock_data['volume'], window=20)
-
-
-        # Calculate Bollinger Bands
-        bb_indicator = ta.volatility.BollingerBands(close=stock_data['close'], window=20, window_dev=2)
-        bb_upper = bb_indicator.bollinger_hband()  # Upper Bollinger Band
-        bb_middle = bb_indicator.bollinger_mavg()  # Middle Bollinger Band
-        bb_lower = bb_indicator.bollinger_lband()  # Lower Bollinger Band
-
-        # Create separate graphs for each indicator
-        sma_graph = go.Figure()
-        sma_graph.add_trace(go.Scatter(x=stock_data['date'], y=stock_data['close'], name='Close Price'))
-        sma_graph.add_trace(go.Scatter(x=stock_data['date'], y=sma_indicator, name='SMA (20)'))
-        sma_graph.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                      font=dict(color='white'),
-                      title=dict(font=dict(color='white')),
-                      xaxis=dict(showticklabels=False,gridcolor='gray'),
-                      yaxis=dict(gridcolor='gray'))
-
-        ema_graph = go.Figure()
-        ema_graph.add_trace(go.Scatter(x=stock_data['date'], y=stock_data['close'], name='Close Price'))
-        ema_graph.add_trace(go.Scatter(x=stock_data['date'], y=ema_indicator, name='EMA (20)'))
-        ema_graph.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                      font=dict(color='white'),
-                      title=dict(font=dict(color='white')),
-                      xaxis=dict(showticklabels=False,gridcolor='gray'),
-                      yaxis=dict(gridcolor='gray'))
-
-        rsi_graph = go.Figure()
-        rsi_graph.add_trace(go.Scatter(x=stock_data['date'], y=rsi_indicator, name='RSI (14)'))
-        rsi_graph.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                      font=dict(color='white'),
-                      title=dict(font=dict(color='white')),
-                      xaxis=dict(showticklabels=False,gridcolor='gray'),
-                      yaxis=dict(gridcolor='gray'))
-
-        bb_graph = go.Figure()
-        bb_graph.add_trace(go.Scatter(x=stock_data['date'], y=stock_data['close'], name='Close Price'))
-        bb_graph.add_trace(go.Scatter(x=stock_data['date'], y=bb_upper, name='BB Upper'))
-        bb_graph.add_trace(go.Scatter(x=stock_data['date'], y=bb_lower, name='BB Lower'))
-        bb_graph.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                      font=dict(color='white'),
-                      title=dict(font=dict(color='white')),
-                      xaxis=dict(showticklabels=False,gridcolor='gray'),
-                      yaxis=dict(gridcolor='gray'))
-
-
-        roc_graph = create_graph(stock_data['date'], stock_data['close'], None, 'ROC Chart')
-
-        wma_graph = create_graph(stock_data['date'], stock_data['close'], wma_indicator.wma(), 'WMA (20) Chart')
-   
-        vwap_graph = create_graph(stock_data['date'], stock_data['close'], vwap_indicator.vwap, 'VWAP Chart')
-    
-        stochastic_graph = create_graph(stock_data['date'], stock_data['close'], stochastic_indicator.stoch(), 'Stochastic (14, 3) Chart')
-    
-        atr_graph = create_graph(stock_data['date'], stock_data['close'], atr_indicator.average_true_range(), 'ATR (14) Chart')
-    
-        cmf_graph = create_graph(stock_data['date'], stock_data['close'], cmf_indicator.chaikin_money_flow(), 'CMF (20) Chart')
-
-        # Convert the Plotly graphs to HTML
-        sma_graph_html = sma_graph.to_html(full_html=False)
-        ema_graph_html = ema_graph.to_html(full_html=False)
-        rsi_graph_html = rsi_graph.to_html(full_html=False)
-        bb_graph_html = bb_graph.to_html(full_html=False)
-        roc_graph_html = roc_graph.to_html(full_html=False)
-        wma_graph_html = wma_graph.to_html(full_html=False)
-        vwap_graph_html = vwap_graph.to_html(full_html=False)
-        stochastic_graph_html = stochastic_graph.to_html(full_html=False)
-        atr_graph_html = atr_graph.to_html(full_html=False)
-        cmf_graph_html = cmf_graph.to_html(full_html=False)
-
-
-        return render_template('indicators.html',ticker=ticker, sma_graph_html=sma_graph_html, ema_graph_html=ema_graph_html, rsi_graph_html=rsi_graph_html, bb_graph_html=bb_graph_html, roc_graph_html=roc_graph_html, wma_graph_html=wma_graph_html, vwap_graph_html=vwap_graph_html, stochastic_graph_html=stochastic_graph_html, atr_graph_html=atr_graph_html, cmf_graph_html=cmf_graph_html)
-    
-    except InvalidTickerError as e:
-        return render_template('errorpage.html')
 
 
 if __name__ == '__main__':

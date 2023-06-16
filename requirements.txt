@@ -1,6 +1,4 @@
-Flask
-cryptography
-sqlite3
+flask
 yfinance
 numpy
 pandas
@@ -8,16 +6,7 @@ scikit-learn
 tensorflow
 plotly
 statsmodels
-time
 matplotlib
-datetime
-warnings
-itertools
-IPython
 seaborn
+IPython
 flask_cors
-json
-math
-threading
-ta
-queue
